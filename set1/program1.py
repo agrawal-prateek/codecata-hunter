@@ -8,6 +8,9 @@ try:
             ans.add(i)
         else:
             come.add(i)
-    print(*ans)
+    if len(ans) == 0:
+        print('unique')
+    else:
+        print(*ans)
 except Exception as e:
     print('Invalid Input')
