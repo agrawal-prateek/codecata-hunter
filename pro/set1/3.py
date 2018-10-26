@@ -1,14 +1,15 @@
-try:
-    s1, s2 = input().split()
-    s1, s2 = list(s1), list(s2)
-
-    i = 0
-    while i < len(s1):
-        if s1[i] in s2:
-            s2.remove(s1[i])
-            del s1[i]
+s1,s2=input().split()
+column=len(s1)+1
+row=len(s2)+1
+c=[[0 for i in range(column)] for i in range(row)]
+for i in range(1,row):
+    c[i][0]=i
+for i in range(1,column):
+    c[0][i]=i
+for i in range(1,row):
+    for j in range(1,column):
+        if s2[i-1]==s1[j-1]:
+            c[i][j]=min(c[i-1][j-1],c[i-1][j],c[i][j-1])
         else:
-            i += 1
-    print(max(len(s1), len(s2)))
-except Exception as e:
-    print('Invalid Input')
+            c[i][j]=min(c[i-1][j-1],c[i-1][j],c[i][j-1])+1
+print(c[row-1][column-1])
