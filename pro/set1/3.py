@@ -1,15 +1,17 @@
-s1,s2=input().split()
-column=len(s1)+1
-row=len(s2)+1
-c=[[0 for i in range(column)] for i in range(row)]
-for i in range(1,row):
-    c[i][0]=i
-for i in range(1,column):
-    c[0][i]=i
-for i in range(1,row):
-    for j in range(1,column):
-        if s2[i-1]==s1[j-1]:
-            c[i][j]=min(c[i-1][j-1],c[i-1][j],c[i][j-1])
-        else:
-            c[i][j]=min(c[i-1][j-1],c[i-1][j],c[i][j-1])+1
-print(c[row-1][column-1])
+try:
+    s1, s2 = input().split()
+    c = len(s1) + 1
+    r = len(s2) + 1
+    dp = [[0 for i in range(c)] for i in range(r)]
+    for i in range(1, r):
+        dp[i][0] = i
+    dp[0] = [i for i in range(1, c)]
+    for i in range(1, r):
+        for j in range(1, c):
+            if s2[i - 1] == s1[j - 1]:
+                dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1])
+            else:
+                dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]) + 1
+    print(dp[r - 1][c - 1])
+except Exception as e:
+    print('Invalid Input')
